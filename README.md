@@ -45,7 +45,6 @@ The project is structured as follows:
 
 Upon running the genetic algorithm, the console output will provide information about each generation's fitness values and the best solution found. Analyzing the results, you can observe how the algorithm converges towards the optimal solution.
 
-<img src="captures/GA_GIF.gif">
 
 The execution visualizes the algorithm's performance, showcasing the fitness values across iterations. This visualization can help understand the convergence and efficiency of the genetic algorithm.
 
