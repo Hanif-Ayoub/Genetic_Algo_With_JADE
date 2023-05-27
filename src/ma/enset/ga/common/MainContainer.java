@@ -1,4 +1,4 @@
-package ma.enset.ga.sma;
+package ma.enset.ga.common;
 
 import jade.core.Profile;
 import jade.core.ProfileImpl;

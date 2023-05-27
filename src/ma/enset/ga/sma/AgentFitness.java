@@ -1,7 +1,6 @@
 package ma.enset.ga.sma;
 
 import jade.core.AID;
-import ma.enset.ga.sequencial.Individual;
 
 public class AgentFitness implements Comparable{
     private AID aid;

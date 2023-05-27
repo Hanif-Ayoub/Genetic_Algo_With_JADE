@@ -2,14 +2,12 @@ package ma.enset.ga.sma;
 
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.OneShotBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
-import jade.wrapper.AgentContainer;
-import ma.enset.ga.sequencial.GAUtils;
+import ma.enset.ga.common.GAUtils;
 
 import java.util.Random;
 

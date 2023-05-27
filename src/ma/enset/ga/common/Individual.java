@@ -1,4 +1,6 @@
-package ma.enset.ga.sequencial;
+package ma.enset.ga.common;
+
+import jade.core.AID;
 
 import java.util.Random;
 
@@ -7,6 +9,21 @@ public class Individual implements Comparable{
     //chromosome
     private char genes[]=new char[GAUtils.CHROMOSOME_SIZE];
     private int fitness;
+    private String agentName;
+
+    public String  getAgentName() {
+        return agentName;
+    }
+
+    public void setAgentName(String  agentName) {
+        this.agentName = agentName;
+    }
+
+    public Individual(char[] genes, int fitness, String  agentName) {
+        this.agentName=agentName;
+        this.genes = genes;
+        this.fitness = fitness;
+    }
 
     public Individual() {
         Random rnd=new Random();

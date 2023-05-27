@@ -1,7 +1,8 @@
 package ma.enset.ga.sequencial;
 
+import ma.enset.ga.common.GAUtils;
+
 import java.util.Arrays;
-import java.util.Random;
 
 public class AGApp {
 
@@ -14,7 +15,7 @@ public class AGApp {
        int it=0;
        System.out.println("Chromosome :"+Arrays.toString(population.getFitnessIndivd().getGenes())+" fitness :"+population.getFitnessIndivd().getFitness());
 
-        while (it<GAUtils.MAX_IT && population.getFitnessIndivd().getFitness()<GAUtils.CHROMOSOME_SIZE){
+        while (it< GAUtils.MAX_IT && population.getFitnessIndivd().getFitness()<GAUtils.CHROMOSOME_SIZE){
             population.selection();
             population.crossover();
             population.mutation();

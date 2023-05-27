@@ -1,4 +1,6 @@
-# 🧬 Genetic Algorithm using Jade Framework
+# 🧬 Genetic Algorithm using Jade Framework (2 models)
+#
+# PART 1 : Genetic Algorithm (N° population = N° agents)
 
 ## Introduction
 
@@ -31,15 +33,6 @@ Mutation introduces random changes in the genetic material of individuals to mai
 
 The genetic algorithm continues iterating through the selection, crossover, and mutation operations until a termination condition is met, such as reaching a maximum number of iterations or finding a satisfactory solution.
 
-## Project Structure
-
-The project is structured as follows:
-
-- `MainAgentGA.java`: This class represents the main agent that coordinates the execution of the genetic algorithm. It handles the population management, selection, crossover, and mutation operations.
-
-- `IndividualAgent.java`: This class represents the individual agents in the genetic algorithm. Each agent maintains its own chromosome, performs calculations, and communicates with the main agent to update its fitness.
-
-- `GAUtils.java`: This class contains utility methods and constants used in the genetic algorithm, such as population size, chromosome size, fitness evaluation, and mutation probability.
 
 ## Results and Analysis
 
@@ -48,6 +41,40 @@ Upon running the genetic algorithm, the console output will provide information 
 <img src="captures/GA_GIF.gif">
 
 The execution visualizes the algorithm's performance, showcasing the fitness values across iterations. This visualization can help understand the convergence and efficiency of the genetic algorithm.
+
+
+# PART 2 : Genetic Algorithm (island model)
+
+<p>The Island Model is a parallel implementation of a genetic algorithm where multiple subpopulations, known as islands, evolve independently and occasionally exchange individuals or information with each other. This approach is inspired by the idea of isolated populations on islands that can undergo their own evolutionary processes but can also interact with other populations when necessary.
+</p>
+<img src="captures/ism.png">
+<p></p>
+<p>In the Island Model, each island represents a separate subpopulation with its own set of individuals. The islands evolve independently by applying genetic operators such as selection, crossover, and mutation to their individuals. This allows each island to explore a different part of the search space and potentially find different solutions.
+</p>
+<p>Overall, the Island Model is a powerful technique in genetic algorithms that combines the benefits of exploration and exploitation through the parallel evolution of multiple subpopulations.
+</p>
+
+## Results
+
+<img src="captures/exis.png">
+
+# Comparison
+<p>The comparison between the Island Model and the model where the number of populations equals the number of agents can be summarized as follows:
+</p>
+<ul>
+<li>Parallelism and Efficiency: </li>
+<ol>
+<li>Island Model: The Island Model inherently provides parallelism by allowing the independent evolution of multiple subpopulations on different islands.</li>
+<li>Model with Number of Populations = Number of Agents: While this model also allows for parallel processing, the lack of interaction between populations limits the potential benefits of parallelism.</li>
+</ol>
+<li>Population Structure: </li>
+<ol>
+<li>Island Model: In the Island Model, the populations are divided into separate islands, with each island representing a subpopulation. The islands evolve independently and can have different sizes or configurations.</li>
+<li>Model with Number of Populations = Number of Agents: In this model, each agent represents a separate population. The populations are not connected or interacting with each other.</li>
+</ol>
+</ul>
+<img src="captures/compa.png">
+
 
 ## Conclusion
 

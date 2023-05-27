@@ -1,11 +1,52 @@
-package ma.enset.ga.sequencial;
+package ma.enset.ga.islandModel;
 
+import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
+import jade.domain.DFService;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.domain.FIPAException;
+import jade.lang.acl.ACLMessage;
 import ma.enset.ga.common.GAUtils;
 import ma.enset.ga.common.Individual;
 
 import java.util.*;
 
-public class Population {
+
+public class islandAgent extends Agent {
+
+    @Override
+    protected void setup() {
+        initialaizePopulation();
+        calculateIndFintess();
+        sortPopulation();
+        addBehaviour(new Behaviour() {
+            int it = 0;
+            @Override
+            public void action() {
+                selection();
+                crossover();
+                mutation();
+                calculateIndFintess();
+                sortPopulation();
+                it++;
+            }
+
+            @Override
+            public boolean done() {
+                if(it ==GAUtils.MAX_IT || getBest().getFitness()==GAUtils.MAX_FITNESS){
+                   sendBest();
+                   return true;
+                }
+                return false;
+            }
+        });
+
+
+    }
+
+
+    //methods needed for applying genetic algorithm
 
     List<Individual> individuals=new ArrayList<>();
     Individual firstFitness;
@@ -13,7 +54,7 @@ public class Population {
     Random rnd=new Random();
     public void initialaizePopulation(){
         for (int i = 0; i< GAUtils.POPULATION_SIZE; i++){
-           individuals.add(new Individual());
+            individuals.add(new Individual());
         }
     }
     public void calculateIndFintess(){
@@ -41,14 +82,12 @@ public class Population {
             individual1.getGenes()[i]=secondFitness.getGenes()[i];
             individual2.getGenes()[i]=firstFitness.getGenes()[i];
         }
-        System.out.println(Arrays.toString(individual1.getGenes()));
-        System.out.println(Arrays.toString(individual2.getGenes()));
 
         individuals.set(individuals.size()-2,individual1);
         individuals.set(individuals.size()-1,individual2);
     }
     public void mutation(){
-       int index=rnd.nextInt(GAUtils.CHROMOSOME_SIZE);
+        int index=rnd.nextInt(GAUtils.CHROMOSOME_SIZE);
         if (rnd.nextDouble()<GAUtils.MUTATION_PROB){
             individuals.get(individuals.size()-2).getGenes()[index]=GAUtils.CHARATERS.charAt(rnd.nextInt(GAUtils.CHARATERS.length()));
         }
@@ -66,7 +105,27 @@ public class Population {
     public void sortPopulation(){
         Collections.sort(individuals,Collections.reverseOrder());
     }
-    public Individual getFitnessIndivd(){
+    public Individual getBest(){
         return individuals.get(0);
     }
+
+    public void sendBest(){
+        DFAgentDescription dfAgentDescription=new DFAgentDescription();
+        ServiceDescription serviceDescription=new ServiceDescription();
+        serviceDescription.setType("ga");
+        dfAgentDescription.addServices(serviceDescription);
+        try {
+            DFAgentDescription[] masterDescription = DFService.search(this, dfAgentDescription);
+            ACLMessage aclMessage = new ACLMessage();
+            aclMessage.addReceiver(masterDescription[0].getName());
+            aclMessage.setContent(Arrays.toString(getBest().getGenes()) + "-" + getBest().getFitness());
+            send(aclMessage);
+        } catch (FIPAException e) {
+            e.printStackTrace();
+        }
+
+    }
+ /*   public Agent getAgent(){
+        return this;
+    }*/
 }
